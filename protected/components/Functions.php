@@ -6310,14 +6310,26 @@ $menu_html.="</li>";
     		   break;
     		   
     		case "msg91":    	    		   
-    		   $msg_resp=Msg91::sendSMS(
+/*    		   $msg_resp=Msg91::sendSMS(
     		      getOptionA('msg91_authkey'),
     		      $to,
     		      getOptionA('msg91_senderid'),
     		      $message,
     		      getOptionA('msg91_unicode'),
     		      !empty(getOptionA('msg91_route'))?getOptionA('msg91_route'):'default'
-    		   );
+    		   );*/
+ 				$msg91_route=getOptionA('msg91_route');
+	               if(empty($msg91_route)){
+	                     $msg91_route='default';
+	               	}
+               $msg_resp=Msg91::sendSMS(
+                  getOptionA('msg91_authkey'),
+                  $to,
+                  getOptionA('msg91_senderid'),
+                  $message,
+                  getOptionA('msg91_unicode'),
+                  $msg91_route
+               );
     		   if($msg_resp){
     		   	  $msg="process";
     		   	  $raw=$msg_resp;
